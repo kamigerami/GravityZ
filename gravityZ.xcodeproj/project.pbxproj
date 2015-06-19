@@ -16,6 +16,7 @@
 		CBE7E8671B34C33800B56F92 /* gravityZTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8661B34C33800B56F92 /* gravityZTests.swift */; };
 		CBE7E8711B34C44700B56F92 /* StartGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8701B34C44700B56F92 /* StartGameScene.swift */; };
 		CBE7E8741B34C81700B56F92 /* taptostartbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E8731B34C81700B56F92 /* taptostartbutton.png */; };
+		CBE7E8761B34CFCA00B56F92 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8751B34CFCA00B56F92 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		CBE7E8661B34C33800B56F92 /* gravityZTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gravityZTests.swift; sourceTree = "<group>"; };
 		CBE7E8701B34C44700B56F92 /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartGameScene.swift; path = ../StartGameScene.swift; sourceTree = "<group>"; };
 		CBE7E8731B34C81700B56F92 /* taptostartbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taptostartbutton.png; sourceTree = "<group>"; };
+		CBE7E8751B34CFCA00B56F92 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				CBE7E8701B34C44700B56F92 /* StartGameScene.swift */,
 				CBE7E84C1B34C33800B56F92 /* AppDelegate.swift */,
 				CBE7E8501B34C33800B56F92 /* GameScene.swift */,
+				CBE7E8751B34CFCA00B56F92 /* Player.swift */,
 				CBE7E8521B34C33800B56F92 /* GameViewController.swift */,
 				CBE7E8541B34C33800B56F92 /* Main.storyboard */,
 				CBE7E8571B34C33800B56F92 /* Images.xcassets */,
@@ -233,6 +236,7 @@
 				CBE7E8511B34C33800B56F92 /* GameScene.swift in Sources */,
 				CBE7E8711B34C44700B56F92 /* StartGameScene.swift in Sources */,
 				CBE7E8531B34C33800B56F92 /* GameViewController.swift in Sources */,
+				CBE7E8761B34CFCA00B56F92 /* Player.swift in Sources */,
 				CBE7E84D1B34C33800B56F92 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
