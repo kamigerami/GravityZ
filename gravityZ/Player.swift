@@ -15,6 +15,8 @@ class Player: SKSpriteNode {
     init() {
         let texture = SKTexture(imageNamed: "player1")
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
+
+        
         animate()
     }
     
@@ -27,7 +29,7 @@ class Player: SKSpriteNode {
         for i in 1...2 {
             playerTextures.append(SKTexture(imageNamed: "player\(i)"))
         }
-        let playerAnimation = SKAction.repeatActionForever( SKAction.animateWithTextures(playerTextures, timePerFrame: 0.1))
+        let playerAnimation = SKAction.repeatActionForever( SKAction.animateWithTextures(playerTextures, timePerFrame: 0.2))
         self.runAction(playerAnimation)
     }
     

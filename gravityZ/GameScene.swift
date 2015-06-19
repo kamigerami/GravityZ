@@ -9,36 +9,33 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    let player:Player = Player()
+    
+    func setupPlayer(){
+        player.position = CGPoint(x:CGRectGetMidX(self.frame), y:player.size.height/2 + 10)
+        addChild(player)
+    }
+    
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.name = "label"
-        myLabel.text = "Gravity Z";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
         
-        self.addChild(myLabel)
+            backgroundColor = SKColor.blackColor()
+        
+            setupPlayer()
+        
+        
+        
+        
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        /* Called when a touch begins */
+      
         
-        let touch = touches.first as! UITouch
-        let touchLocation = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(touchLocation)
         
-        if (touchedNode.name == "label") {
-            let gameOverScene = GameScene(size: size)
-            gameOverScene.scaleMode = scaleMode
-            let transitionType = SKTransition.pushWithDirection(.Up, duration:1.0)
-            view?.presentScene(gameOverScene,transition: transitionType)
-
-            
-            
-        }
+        
     }
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+
     }
 }

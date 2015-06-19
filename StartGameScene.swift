@@ -11,9 +11,20 @@ import SpriteKit
 class StartGameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
+        
+        /* Setup your scene here */
+        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
+        myLabel.name = "label"
+        myLabel.text = "Gravity Z";
+        myLabel.fontSize = 50;
+        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        
+        
         let startGameButton = SKSpriteNode(imageNamed: "taptostartbutton")
         startGameButton.position = CGPointMake(size.width/2, size.height/2 - 100)
         startGameButton.name = "startgame"
+        
+        self.addChild(myLabel)
         addChild(startGameButton)
         backgroundColor = SKColor.blackColor()
     

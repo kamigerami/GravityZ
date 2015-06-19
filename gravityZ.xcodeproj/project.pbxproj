@@ -17,6 +17,7 @@
 		CBE7E8711B34C44700B56F92 /* StartGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8701B34C44700B56F92 /* StartGameScene.swift */; };
 		CBE7E8741B34C81700B56F92 /* taptostartbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E8731B34C81700B56F92 /* taptostartbutton.png */; };
 		CBE7E8761B34CFCA00B56F92 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8751B34CFCA00B56F92 /* Player.swift */; };
+		CBE7E87A1B34D2B500B56F92 /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E8771B34D2B500B56F92 /* platform.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		CBE7E8701B34C44700B56F92 /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartGameScene.swift; path = ../StartGameScene.swift; sourceTree = "<group>"; };
 		CBE7E8731B34C81700B56F92 /* taptostartbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taptostartbutton.png; sourceTree = "<group>"; };
 		CBE7E8751B34CFCA00B56F92 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		CBE7E8771B34D2B500B56F92 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		CBE7E8721B34C81700B56F92 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				CBE7E8771B34D2B500B56F92 /* platform.png */,
 				CBE7E8731B34C81700B56F92 /* taptostartbutton.png */,
 			);
 			path = assets;
@@ -214,6 +217,7 @@
 			files = (
 				CBE7E85B1B34C33800B56F92 /* LaunchScreen.xib in Resources */,
 				CBE7E8741B34C81700B56F92 /* taptostartbutton.png in Resources */,
+				CBE7E87A1B34D2B500B56F92 /* platform.png in Resources */,
 				CBE7E8581B34C33800B56F92 /* Images.xcassets in Resources */,
 				CBE7E8561B34C33800B56F92 /* Main.storyboard in Resources */,
 			);
