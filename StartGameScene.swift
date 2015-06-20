@@ -25,6 +25,9 @@ class StartGameScene: SKScene {
         
         
         let startGameButton = SKSpriteNode(imageNamed: "taptostartbutton")
+        
+        startGameButton.setScale(0.5)
+        
         startGameButton.position = CGPointMake(size.width/2, size.height/2 - 100)
         startGameButton.name = "startgame"
         

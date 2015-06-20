@@ -16,7 +16,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
     
+    var bg = SKSpriteNode()
     var player = SKSpriteNode()
+    var fg = SKSpriteNode()
 
 
 
@@ -26,7 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         
         // background
-            var bg = SKSpriteNode()
         
      
         
@@ -52,8 +53,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
               self.addChild(bg)
             }
         
+        // foreground
+        fg = SKSpriteNode(color: UIColor(red: 0.129, green: 0.129, blue: 0.129, alpha: 0.5), size: CGSize(width: bg.size.width * 2, height: 100))
+        fg.position = CGPointMake(0, -self.frame.size.height/4 + fg.frame.size.height)
+        fg.zPosition = 5
         
+        fg.physicsBody = SKPhysicsBody(rectangleOfSize: fg.size)
+        fg.physicsBody?.dynamic = false
         
+        addChild(fg)
+        
+            
+            
        // starField
         
             starField.position = CGPointMake(size.width/2,size.height)
@@ -65,8 +76,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
             player = SKSpriteNode(color: UIColor(white: 1.0, alpha: 0.9), size: CGSize(width: self.frame.height/25, height: self.frame.height/25))
         
-        
-            player.position = CGPoint(x: player.size.width * 2, y: player.size.height * 4)
+            // place player in middle x position and on top of foreground.size
+            player.position = CGPoint(x: self.frame.size.width / 2, y: fg.size.height + player.size.height)
             player.zPosition = 10
         
         
@@ -88,8 +99,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         // preventing double jump mid air
-        if player.position.y < self.frame.height/25 * 2{
-            player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+        player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+        if player.position.y <= fg.size.height + player.size.height{
             player.physicsBody?.velocity = CGVectorMake(0,0)
             player.physicsBody?.applyImpulse(CGVectorMake(0,10))
         }
@@ -98,7 +109,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        player.color = UIColor(white: 1.0, alpha: 0.9)
+        player.color = UIColor(white: 1.0, alpha: 0.9
+        )
 
     
     }
