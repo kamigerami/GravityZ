@@ -18,7 +18,7 @@ class StartGameScene: SKScene {
         
         /* Setup your scene here */
         let myLabel = PulsatingText(fontNamed:"Chalkduster")
-        myLabel.setTextFontSizeAndPulsate("GravityZ", theFontSize: 50)
+        myLabel.setTextFontSizeAndPulsate("GravityZ", theFontSize: 40)
         myLabel.position = CGPointMake(size.width/2,size.height/2)
 
         
