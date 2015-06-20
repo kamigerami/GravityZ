@@ -29,6 +29,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     override func didMoveToView(view: SKView) {
+        
+            var bg = SKSpriteNode()
+        
             self.physicsWorld.gravity = CGVectorMake(0, -20)
             self.physicsWorld.contactDelegate = self
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
@@ -42,7 +45,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
             addChild(starField)
         
+             var bgTexture = SKTexture(imageNamed: "bg_far")
+             bg = SKSpriteNode(texture: bgTexture)
+             bg.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
+             bg.size.height = self.frame.height
+             bg.zPosition = -1100
+        
+        
             backgroundColor = SKColor.blackColor()
+        
+            self.addChild(bg)
         
             setupPlayer()
             setupAccelerometer()
@@ -66,11 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             player.runAction(actionMove)
         }
         
-        /*
-selected = [:] for touch: AnyObject in touches { let location = touch.locationInNode(self) selected[touch as UITouch] = nodeAtPoint(location) } - See more at: http://asmeurer.github.io/blog/posts/playing-with-swift-and-spritekit/#sthash.8eIGJVAj.dpuf
-*/
-        
-        
+
     }
         
     

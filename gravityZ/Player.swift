@@ -16,11 +16,19 @@ class Player: SKSpriteNode {
         static let EdgeBody: UInt32 = 0x1 << 4
     }
     
-    
+ 
     
       init() {
-        let texture = SKTexture(imageNamed: "player1")
-        super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
+        let texture1 = SKTexture(imageNamed: "player1")
+        super.init(texture: texture1, color: SKColor.clearColor(), size: texture1.size())
+        
+        let texture2 = SKTexture(imageNamed: "player2")
+        
+        var animation = SKAction.animateWithTextures([texture1, texture2], timePerFrame: 0.1)
+        var makeAnimation = SKAction.repeatActionForever(animation)
+        
+        self.runAction(makeAnimation)
+        /*
         self.physicsBody =
             SKPhysicsBody(texture: self.texture,size:self.size)
         //self.physicsBody?.dynamic = true
@@ -29,9 +37,8 @@ class Player: SKSpriteNode {
         self.physicsBody?.categoryBitMask = CollisionCategories.Player
         self.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
         self.physicsBody?.allowsRotation = true
+        */
         
-        
-        animate()
     }
     
   
@@ -50,14 +57,6 @@ class Player: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    private func animate(){
-        var playerTextures:[SKTexture] = []
-        for i in 1...2 {
-            playerTextures.append(SKTexture(imageNamed: "player\(i)"))
-        }
-        let playerAnimation = SKAction.repeatActionForever( SKAction.animateWithTextures(playerTextures, timePerFrame: 0.2))
-        self.runAction(playerAnimation)
-    }
     
     
     func die (){
