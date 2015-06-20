@@ -23,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     func setupPlayer(){
         player.position = CGPoint(x:player.size.width/2 + 20 , y:player.size.height/2 + 10)
+        player.zPosition = 10
         addChild(player)
         
         
@@ -32,29 +33,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
             var bg = SKSpriteNode()
         
+        
+        
             self.physicsWorld.gravity = CGVectorMake(0, -20)
             self.physicsWorld.contactDelegate = self
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
             self.physicsBody?.categoryBitMask = Player.CollisionCategories.EdgeBody
 
-     
+        
+            var bgTexture = SKTexture(imageNamed: "bg_far")
+            var moveBG = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 7)
+            var replaceBG = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
+            var moveBGForever = SKAction.repeatActionForever(SKAction.sequence([moveBG,replaceBG]))
+
+        
+        for var i : CGFloat = 0; i < 4; i++ {
+            
+            
+              bg = SKSpriteNode(texture: bgTexture)
+                bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
+              bg.size.height = self.frame.height
+          
+              bg.runAction(moveBGForever)
+              self.addChild(bg)
+            }
+        
+        
+        
+    
         
             let starField = SKEmitterNode(fileNamed: "StarField")
             starField.position = CGPointMake(size.width/2,size.height)
-            starField.zPosition = -1000
-        
+            starField.zPosition = 5
             addChild(starField)
-        
-             var bgTexture = SKTexture(imageNamed: "bg_far")
-             bg = SKSpriteNode(texture: bgTexture)
-             bg.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))
-             bg.size.height = self.frame.height
-             bg.zPosition = -1100
-        
-        
-            backgroundColor = SKColor.blackColor()
-        
-            self.addChild(bg)
+       
         
             setupPlayer()
             setupAccelerometer()

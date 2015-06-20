@@ -28,7 +28,7 @@ class Player: SKSpriteNode {
         var makeAnimation = SKAction.repeatActionForever(animation)
         
         self.runAction(makeAnimation)
-        /*
+      
         self.physicsBody =
             SKPhysicsBody(texture: self.texture,size:self.size)
         //self.physicsBody?.dynamic = true
@@ -37,7 +37,7 @@ class Player: SKSpriteNode {
         self.physicsBody?.categoryBitMask = CollisionCategories.Player
         self.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
         self.physicsBody?.allowsRotation = true
-        */
+      
         
     }
     
