@@ -11,13 +11,17 @@ import SpriteKit
 class StartGameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
+        let starField = SKEmitterNode(fileNamed: "StarField")
+        starField.position = CGPointMake(size.width/2,size.height/2)
+        starField.zPosition = -1000
+        
         
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.name = "label"
-        myLabel.text = "Gravity Z";
-        myLabel.fontSize = 50;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        let myLabel = PulsatingText(fontNamed:"Chalkduster")
+        myLabel.setTextFontSizeAndPulsate("GravityZ", theFontSize: 50)
+        myLabel.position = CGPointMake(size.width/2,size.height/2)
+
+        
         
         
         let startGameButton = SKSpriteNode(imageNamed: "taptostartbutton")
@@ -25,7 +29,11 @@ class StartGameScene: SKScene {
         startGameButton.name = "startgame"
         
         self.addChild(myLabel)
+    
         addChild(startGameButton)
+        addChild(starField)
+
+        
         backgroundColor = SKColor.blackColor()
     
     }
