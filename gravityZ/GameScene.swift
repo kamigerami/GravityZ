@@ -11,47 +11,16 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
+    
     let maxLevels = 3
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
     
-    var selected: [UITouch: SKNode] = [:]
-    
-    
-   /* func setupPlayer(){
-        
-        struct CollisionCategories{
-            static let Player: UInt32 = 0x1 << 1
-            static let EdgeBody: UInt32 = 0x1 << 4
-        }
-        
-        var player = SKSpriteNode()
-        
-            let texture1 = SKTexture(imageNamed: "player1")
-        
-            let texture2 = SKTexture(imageNamed: "player2")
-            
-            var animation = SKAction.animateWithTextures([texture1, texture2], timePerFrame: 0.1)
-            var makeAnimation = SKAction.repeatActionForever(animation)
-            
-            self.runAction(makeAnimation)
-        
-            
-            player.physicsBody =
-            SKPhysicsBody(texture: player.texture,size:player.size)
-            //self.physicsBody?.dynamic = true
-            player.physicsBody?.usesPreciseCollisionDetection = true
-            player.physicsBody?.collisionBitMask = 0x0
-            player.physicsBody?.categoryBitMask = CollisionCategories.Player
-            player.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
-            player.physicsBody?.allowsRotation = true
-            
+    var player = SKSpriteNode()
 
-        player.position = CGPoint(x:player.size.width/2 + 20 , y:player.size.height/2 + 10)
-        addChild(player)
-        
-        
-    }*/
+
+
+    let starField = SKEmitterNode(fileNamed: "StarField")
     
     override func didMoveToView(view: SKView) {
         
@@ -59,7 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         // background
             var bg = SKSpriteNode()
         
-        
+     
         
             self.physicsWorld.gravity = CGVectorMake(0, -20)
             self.physicsWorld.contactDelegate = self
@@ -67,7 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
         
             var bgTexture = SKTexture(imageNamed: "bg_far")
-            var moveBG = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 7)
+            var moveBG = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 4)
             var replaceBG = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
             var moveBGForever = SKAction.repeatActionForever(SKAction.sequence([moveBG,replaceBG]))
 
@@ -87,7 +56,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
        // starField
         
-            let starField = SKEmitterNode(fileNamed: "StarField")
             starField.position = CGPointMake(size.width/2,size.height)
             starField.zPosition = 5
             addChild(starField)
@@ -95,35 +63,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
       // Player
         
         
+            player = SKSpriteNode(color: UIColor(white: 1.0, alpha: 0.9), size: CGSize(width: self.frame.height/25, height: self.frame.height/25))
         
         
+            player.position = CGPoint(x: player.size.width * 2, y: player.size.height * 4)
+            player.zPosition = 10
+        
+        
+        player.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(player.frame.size.width, player.frame.size.height))
+            player.physicsBody?.dynamic = true
+            player.physicsBody?.allowsRotation = false
+        
+            self.addChild(player)
+        
+        
+    
         
       // accelerometer
       setupAccelerometer()
 
         
     }
+   
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-      
-        selected = [:]
-        for touch: AnyObject in touches {
-            let location = touch.locationInNode(self) //1
-           
-             selected[touch as! UITouch] = nodeAtPoint(location)
-            
-            print(selected)
-            
-            // logic for the movement
-            
-            // touching half top of screen
-    
-        
+        // preventing double jump mid air
+        if player.position.y < self.frame.height/25 * 2{
+            player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
+            player.physicsBody?.velocity = CGVectorMake(0,0)
+            player.physicsBody?.applyImpulse(CGVectorMake(0,10))
         }
         
-
     }
-        
+    
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        player.color = UIColor(white: 1.0, alpha: 0.9)
+
+    
+    }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
