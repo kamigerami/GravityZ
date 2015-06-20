@@ -11,34 +11,9 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     
-    struct CollisionCategories{
-        static let Player: UInt32 = 0x1 << 1
-        static let EdgeBody: UInt32 = 0x1 << 4
-    }
+    var aniMate: () = ()
     
- 
-    
-      init() {
-        let texture1 = SKTexture(imageNamed: "player1")
-        super.init(texture: texture1, color: SKColor.clearColor(), size: texture1.size())
-        
-        let texture2 = SKTexture(imageNamed: "player2")
-        
-        var animation = SKAction.animateWithTextures([texture1, texture2], timePerFrame: 0.1)
-        var makeAnimation = SKAction.repeatActionForever(animation)
-        
-        self.runAction(makeAnimation)
-      
-        self.physicsBody =
-            SKPhysicsBody(texture: self.texture,size:self.size)
-        //self.physicsBody?.dynamic = true
-        self.physicsBody?.usesPreciseCollisionDetection = true
-        self.physicsBody?.collisionBitMask = 0x0
-        self.physicsBody?.categoryBitMask = CollisionCategories.Player
-        self.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
-        self.physicsBody?.allowsRotation = true
-      
-        
+          
     }
     
   

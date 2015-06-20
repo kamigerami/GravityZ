@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>2007EB65-12A8-4F64-ABB8-7232AE917EF1</string>
+	<string>7A71BE7F-EDA2-43DC-BC1E-349D904AA21F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>gravityZ</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B42786FDF70408533DE695CDCBA27C174E394139</key>
 		<string>github.com:kamigerami/GravityZ.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>gravityZ.xcodeproj/project.xcworkspace</string>
+	<string>gravityZ.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>B42786FDF70408533DE695CDCBA27C174E394139</key>

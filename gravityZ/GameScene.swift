@@ -11,26 +11,52 @@ import SpriteKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
-    let player:Player = Player()
     let maxLevels = 3
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
     
-    
-    var actionMove = SKAction()
     var selected: [UITouch: SKNode] = [:]
     
     
-    func setupPlayer(){
+   /* func setupPlayer(){
+        
+        struct CollisionCategories{
+            static let Player: UInt32 = 0x1 << 1
+            static let EdgeBody: UInt32 = 0x1 << 4
+        }
+        
+        var player = SKSpriteNode()
+        
+            let texture1 = SKTexture(imageNamed: "player1")
+        
+            let texture2 = SKTexture(imageNamed: "player2")
+            
+            var animation = SKAction.animateWithTextures([texture1, texture2], timePerFrame: 0.1)
+            var makeAnimation = SKAction.repeatActionForever(animation)
+            
+            self.runAction(makeAnimation)
+        
+            
+            player.physicsBody =
+            SKPhysicsBody(texture: player.texture,size:player.size)
+            //self.physicsBody?.dynamic = true
+            player.physicsBody?.usesPreciseCollisionDetection = true
+            player.physicsBody?.collisionBitMask = 0x0
+            player.physicsBody?.categoryBitMask = CollisionCategories.Player
+            player.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
+            player.physicsBody?.allowsRotation = true
+            
+
         player.position = CGPoint(x:player.size.width/2 + 20 , y:player.size.height/2 + 10)
-        player.zPosition = 10
         addChild(player)
         
         
-    }
+    }*/
     
     override func didMoveToView(view: SKView) {
         
+        
+        // background
             var bg = SKSpriteNode()
         
         
@@ -38,7 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.physicsWorld.gravity = CGVectorMake(0, -20)
             self.physicsWorld.contactDelegate = self
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
-            self.physicsBody?.categoryBitMask = Player.CollisionCategories.EdgeBody
 
         
             var bgTexture = SKTexture(imageNamed: "bg_far")
@@ -60,16 +85,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         
         
-    
+       // starField
         
             let starField = SKEmitterNode(fileNamed: "StarField")
             starField.position = CGPointMake(size.width/2,size.height)
             starField.zPosition = 5
             addChild(starField)
        
+      // Player
         
-            setupPlayer()
-            setupAccelerometer()
+        
+        
+        
+        
+      // accelerometer
+      setupAccelerometer()
 
         
     }
@@ -87,7 +117,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             // logic for the movement
             
             // touching half top of screen
-            player.runAction(actionMove)
+    
+        
         }
         
 
@@ -109,9 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         })
     }
     
-    override func didSimulatePhysics() {
-        player.physicsBody?.velocity = CGVector(dx: accelerationX * 50, dy: 0.5)
-    }
+
     
   
     

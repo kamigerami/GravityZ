@@ -16,7 +16,6 @@
 		CBE7E8671B34C33800B56F92 /* gravityZTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8661B34C33800B56F92 /* gravityZTests.swift */; };
 		CBE7E8711B34C44700B56F92 /* StartGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8701B34C44700B56F92 /* StartGameScene.swift */; };
 		CBE7E8741B34C81700B56F92 /* taptostartbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E8731B34C81700B56F92 /* taptostartbutton.png */; };
-		CBE7E8761B34CFCA00B56F92 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8751B34CFCA00B56F92 /* Player.swift */; };
 		CBE7E87A1B34D2B500B56F92 /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E8771B34D2B500B56F92 /* platform.png */; };
 		CBE7E8811B34D91300B56F92 /* player1.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E87D1B34D91300B56F92 /* player1.png */; };
 		CBE7E8821B34D91300B56F92 /* player2.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE7E87E1B34D91300B56F92 /* player2.png */; };
@@ -52,7 +51,6 @@
 		CBE7E8661B34C33800B56F92 /* gravityZTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gravityZTests.swift; sourceTree = "<group>"; };
 		CBE7E8701B34C44700B56F92 /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartGameScene.swift; path = ../StartGameScene.swift; sourceTree = "<group>"; };
 		CBE7E8731B34C81700B56F92 /* taptostartbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taptostartbutton.png; sourceTree = "<group>"; };
-		CBE7E8751B34CFCA00B56F92 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CBE7E8771B34D2B500B56F92 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
 		CBE7E87D1B34D91300B56F92 /* player1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player1.png; sourceTree = "<group>"; };
 		CBE7E87E1B34D91300B56F92 /* player2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player2.png; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 				CBE7E84C1B34C33800B56F92 /* AppDelegate.swift */,
 				CBE7E8501B34C33800B56F92 /* GameScene.swift */,
 				CBE7E8891B34E30600B56F92 /* PulsatingText.swift */,
-				CBE7E8751B34CFCA00B56F92 /* Player.swift */,
 				CBE7E8851B34E0C200B56F92 /* StarField.sks */,
 				CBE7E8861B34E0C200B56F92 /* spark.png */,
 				CBE7E8521B34C33800B56F92 /* GameViewController.swift */,
@@ -271,7 +268,6 @@
 				CBE7E8511B34C33800B56F92 /* GameScene.swift in Sources */,
 				CBE7E8711B34C44700B56F92 /* StartGameScene.swift in Sources */,
 				CBE7E8531B34C33800B56F92 /* GameViewController.swift in Sources */,
-				CBE7E8761B34CFCA00B56F92 /* Player.swift in Sources */,
 				CBE7E88A1B34E30600B56F92 /* PulsatingText.swift in Sources */,
 				CBE7E84D1B34C33800B56F92 /* AppDelegate.swift in Sources */,
 			);
@@ -471,6 +467,7 @@
 				CBE7E86C1B34C33800B56F92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CBE7E86D1B34C33800B56F92 /* Build configuration list for PBXNativeTarget "gravityZTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +476,7 @@
 				CBE7E86F1B34C33800B56F92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
