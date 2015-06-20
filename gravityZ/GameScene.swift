@@ -18,6 +18,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     var bg = SKSpriteNode()
     var player = SKSpriteNode()
+    var player_left_eye = SKSpriteNode()
+    var player_right_eye = SKSpriteNode()
+    
     var fg = SKSpriteNode()
     
     
@@ -84,7 +87,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
             self.addChild(player)
         
+            player_left_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
+            player_right_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
         
+            player_left_eye.position = CGPointMake(5, 5)
+            player_right_eye.position = CGPointMake(-5, 5)
+
+            player.addChild(player_left_eye)
+            player.addChild(player_right_eye)
 
         
     }
@@ -111,9 +121,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         /* Called before each frame is rendered */
         if player.position.y <= fg.size.height {
             player.color = UIColor(white: 1.0, alpha: 0.9)
+  
+
         } else {
             player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-        
+   
+            
+
 
     }
     
