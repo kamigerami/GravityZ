@@ -23,14 +23,13 @@ class Player: SKSpriteNode {
         super.init(texture: texture, color: SKColor.clearColor(), size: texture.size())
         self.physicsBody =
             SKPhysicsBody(texture: self.texture,size:self.size)
-        self.physicsBody?.dynamic = true
+        //self.physicsBody?.dynamic = true
         self.physicsBody?.usesPreciseCollisionDetection = true
         self.physicsBody?.collisionBitMask = 0x0
         self.physicsBody?.categoryBitMask = CollisionCategories.Player
         self.physicsBody?.collisionBitMask = CollisionCategories.EdgeBody
-        self.physicsBody?.allowsRotation = false
+        self.physicsBody?.allowsRotation = true
         
-        animate()
         
         animate()
     }
