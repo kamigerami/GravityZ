@@ -154,7 +154,6 @@ class Player: SKSpriteNode {
                 self.body.runAction(up)
             })
         })
-
         
     }
     
