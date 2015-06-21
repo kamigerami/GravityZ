@@ -28,10 +28,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
     var player: Player!
     
+    var ground: GroundMovement!
 
     let starField = SKEmitterNode(fileNamed: "StarField")
-    
-    
+
     
     
     override func didMoveToView(view: SKView) {
@@ -53,40 +53,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         // background
         
             self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+            // add the rest of foreground / background here //
         
-        
-            var bgTexture = SKTexture(imageNamed: "bg_far")
-            var moveBG = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 4)
-            var replaceBG = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
-            var moveBGForever = SKAction.repeatActionForever(SKAction.sequence([moveBG,replaceBG]))
-
-            backgroundColor = SKColor.blackColor()
-
-        
-       
-        for var i : CGFloat = 0; i < 4; i++ {
-            
-            
-              bg = SKSpriteNode(texture: bgTexture)
-                bg.position = CGPoint(x: bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
-              bg.size.height = self.frame.height
-          
-              bg.runAction(moveBGForever)
-              World.addChild(bg)
-            
-            // ground level
-            fg = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width * i, height: fg.size.height))
-            fg.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
-            fg.position = CGPoint(x: self.frame.width / i, y: self.frame.height / i - 70)
-            World.addChild(fg)
-            
-        }
         
        // starField
         
             starField.position = CGPointMake(size.width/2,size.height)
             starField.zPosition = 5
-            World.addChild(starField)
        
       // Player
        
@@ -131,7 +104,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         isStarted = true
         player.stop()
         player.startRunning()
-        
+        World.addChild(starField)
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -155,7 +129,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-      
+    
+            player.stop()
+  
     
     }
     
@@ -166,17 +142,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
     }
             
-  
-        
-    
-    func setupAccelerometer(){
-        motionManager.accelerometerUpdateInterval = 0.2
-        motionManager.startAccelerometerUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler: {
-            (accelerometerData: CMAccelerometerData!, error: NSError!) in
-            let acceleration = accelerometerData.acceleration
-            self.accelerationX = CGFloat(acceleration.x)
-        })
-    }
+
 }
-
-
