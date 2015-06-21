@@ -15,6 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     let maxLevels = 3
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
+    var isStarted = false
+
+    
     
     var bg = SKSpriteNode()
     
@@ -92,10 +95,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         player.zPosition = 1
         
-        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 20 )
+        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 12 )
         
         World.addChild(player)
-       
+        player.breath()
+
 
         
         
@@ -119,14 +123,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
     }
 
-    
+    func start() {
+        isStarted = true
+        player.stop()
+        player.startRunning()
+        
+    }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if !isStarted {
+            start()
+        } else {
+            player.stop()
+        }
+        
         // preventing double jump mid air
-        
-        
-         player.breath()
-        
         if player.position.y <= fg.position.y * -2 {
             player.physicsBody?.velocity = CGVectorMake(0,0)
             player.physicsBody?.applyImpulse(CGVectorMake(0,15))
@@ -136,7 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-         player.stop()
+      
     
     }
     

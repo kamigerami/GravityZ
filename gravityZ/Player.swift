@@ -14,9 +14,8 @@ class Player: SKSpriteNode {
 
     var body: SKSpriteNode!
     var arm: SKSpriteNode!
-    var left_foot: SKSpriteNode!
-    var right_foot: SKSpriteNode!
-    
+    var left_leg: SKSpriteNode!
+    var right_leg: SKSpriteNode!
     
     init(size: CGSize) {
         
@@ -73,7 +72,7 @@ class Player: SKSpriteNode {
         let armColor =  UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
         arm = SKSpriteNode(color: armColor, size: CGSizeMake(8, 14))
         arm.anchorPoint = CGPointMake(0.5,0.9)
-        arm.position = CGPointMake(-11, -6)
+        arm.position = CGPointMake(-12, -12)
         body.addChild(arm)
         
         let hand = SKSpriteNode(color: skinColor, size: CGSizeMake(arm.size.width, 5))
@@ -83,22 +82,65 @@ class Player: SKSpriteNode {
         
         
         // the legs
-        left_foot = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(body.size.width/4, body.size.height/8))
-        left_foot.position = CGPointMake(leftEye.position.x - left_foot.size.width + 2, -body.size.height/2 + left_foot.size.height/2 - 4)
         
-        addChild(left_foot)
+        // left leg
         
-        right_foot = left_foot.copy() as! SKSpriteNode
-        right_foot.position.x = left_foot.position.x + 18
+        left_leg = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(body.size.width/4, body.size.height/8 + 2))
+        left_leg.position = CGPointMake(leftEye.position.x - left_leg.size.width + 2, -body.size.height/2 + left_leg.size.height/2 - 8)
+        
+        addChild(left_leg)
+        
+        // right leg
+        right_leg = left_leg.copy() as! SKSpriteNode
+        right_leg.position.x = left_leg.position.x + 18
         
         
-        addChild(right_foot)
+        addChild(right_leg)
         
-
+        
+        // left foot
+        
+        let left_foot = SKSpriteNode(color: skinColor, size: CGSizeMake(left_leg.size.width, left_leg.size.height/4))
+        left_foot.position = CGPointMake(0,-4)
+        
+        left_leg.addChild(left_foot)
+        
+        // right foot
+        
+        let right_foot = left_foot.copy() as! SKSpriteNode
+        
+        right_leg.addChild(right_foot)
         
         }
     
-     // animations 
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // animations
+    
+    func startRunning() {
+        let rotateBack = SKAction.rotateByAngle(-CGFloat(M_PI)/2.0, duration: 0.1)
+        arm.runAction(rotateBack)
+        
+        performOneRunCycle()
+    }
+    
+    func performOneRunCycle() {
+        let up = SKAction.moveByX(0, y: 2, duration: 0.05)
+        let down = SKAction.moveByX(0, y: -2, duration: 0.05)
+        
+        left_leg.runAction(up, completion: { () -> Void in
+            self.left_leg.runAction(down)
+            self.right_leg.runAction(up, completion: { () -> Void in
+                self.right_leg.runAction(down, completion:  { () -> Void in
+                    self.performOneRunCycle()
+                    
+                })
+            })
+        })
+    }
     
     func breath() {
         
@@ -113,11 +155,5 @@ class Player: SKSpriteNode {
     func stop() {
         body.removeAllActions()
     }
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     
 }
