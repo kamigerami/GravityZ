@@ -135,6 +135,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             start()
         } else {
             player.stop()
+            player.jump()
         }
         
         // preventing double jump mid air
