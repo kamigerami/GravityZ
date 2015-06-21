@@ -97,7 +97,24 @@ class Player: SKSpriteNode {
 
         
         }
-
+    
+     // animations 
+    
+    func breath() {
+        
+        let breathOut = SKAction.moveByX(0.0, y: -2.0, duration: 1)
+        let breathIn = SKAction.moveByX(0.0, y: 2.0 , duration: 1)
+        
+        let breath = SKAction.sequence([breathOut, breathIn])
+        body.runAction(SKAction.repeatActionForever(breath))
+        
+    }
+    
+    func stop() {
+        body.removeAllActions()
+    }
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

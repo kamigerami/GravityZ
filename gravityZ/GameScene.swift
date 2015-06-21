@@ -95,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 20 )
         
         World.addChild(player)
-        
+       
 
         
         
@@ -124,6 +124,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         // preventing double jump mid air
         
+        
+         player.breath()
+        
         if player.position.y <= fg.position.y * -2 {
             player.physicsBody?.velocity = CGVectorMake(0,0)
             player.physicsBody?.applyImpulse(CGVectorMake(0,15))
@@ -133,7 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-
+         player.stop()
     
     }
     
