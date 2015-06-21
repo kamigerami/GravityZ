@@ -17,20 +17,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var accelerationX: CGFloat = 0.5
     
     var bg = SKSpriteNode()
-    var player = SKSpriteNode()
-    var player_left_eye = SKSpriteNode()
-    var player_right_eye = SKSpriteNode()
     
     var fg = SKSpriteNode()
     
     var World: SKNode!
     var Camera: SKNode!
 
-
+    var player: Player!
+    
 
     let starField = SKEmitterNode(fileNamed: "StarField")
     
+    
+    
+    
     override func didMoveToView(view: SKView) {
+        
+     
         
         // world and camera
         
@@ -69,7 +72,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
               World.addChild(bg)
             
             // ground level
-            fg = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width * i, height: player.size.height))
+            fg = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: self.frame.width * i, height: fg.size.height))
             fg.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
             fg.position = CGPoint(x: self.frame.width / i, y: self.frame.height / i - 70)
             World.addChild(fg)
@@ -83,29 +86,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             World.addChild(starField)
        
       // Player
+        player = Player(size: CGSizeMake(frame.size.height, frame.size.height))
+        player.zPosition = 1
+        World.addChild(player)
         
+       /* player_left_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
+        player_right_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
         
-            player = SKSpriteNode(color: UIColor(white: 1.0, alpha: 0.9), size: CGSize(width: self.frame.height/15, height: self.frame.height/15))
+        player_left_eye.position = CGPointMake(5, 5)
+        player_right_eye.position = CGPointMake(-5, 5)
         
-            // place player in middle x position and on top of foreground.size
-            player.position = CGPoint(x: CGRectGetMidX(self.frame), y: player.size.height)
-            player.zPosition = 10
+        player.addChild(player_left_eye)
+        player.addChild(player_right_eye)
+        */
         
-        
-        player.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(player.frame.size.width, player.frame.size.height))
-            player.physicsBody?.dynamic = true
-            player.physicsBody?.allowsRotation = false
-        
-            World.addChild(player)
-        
-            player_left_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
-            player_right_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
-        
-            player_left_eye.position = CGPointMake(5, 5)
-            player_right_eye.position = CGPointMake(-5, 5)
-
-            player.addChild(player_left_eye)
-            player.addChild(player_right_eye)
 
         
     }
@@ -131,7 +125,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         // preventing double jump mid air
         
-        player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
         if player.position.y <= fg.position.y * -2 {
             player.physicsBody?.velocity = CGVectorMake(0,0)
             player.physicsBody?.applyImpulse(CGVectorMake(0,15))
@@ -141,25 +134,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-       // player.color = UIColor(white: 1.0, alpha: 0.9)
 
     
     }
     
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-        if player.position.y <= fg.position.y * -2 {
-            player.color = UIColor(white: 1.0, alpha: 0.9)
-  
 
-        } else {
-            player.color = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.9)
-   
-            
 
 
     }
-    
+            
+  
+        
     
     func setupAccelerometer(){
         motionManager.accelerometerUpdateInterval = 0.2
@@ -169,9 +156,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.accelerationX = CGFloat(acceleration.x)
         })
     }
-    }
+}
 
-    
-  
-    
-    }
+
