@@ -94,11 +94,7 @@ class Player: SKSpriteNode {
         
         addChild(right_foot)
         
-        
-        
-        
-        
-        
+
         
         }
 

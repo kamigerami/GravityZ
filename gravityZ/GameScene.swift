@@ -86,19 +86,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             World.addChild(starField)
        
       // Player
+       
+        // instantiating the Player with the size arguments
         player = Player(size: CGSizeMake(frame.size.height, frame.size.height))
+        
         player.zPosition = 1
+        
+        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 20 )
+        
         World.addChild(player)
         
-       /* player_left_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
-        player_right_eye = SKSpriteNode(color: UIColor(red: 0.140, green: 0.130, blue: 0.130, alpha: 1.0), size: CGSize(width: self.frame.height/55, height: self.frame.height/55))
+
         
-        player_left_eye.position = CGPointMake(5, 5)
-        player_right_eye.position = CGPointMake(-5, 5)
-        
-        player.addChild(player_left_eye)
-        player.addChild(player_right_eye)
-        */
         
 
         
