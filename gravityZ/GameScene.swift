@@ -97,6 +97,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 12 )
         
+        player.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+        player.physicsBody?.dynamic = true
+        player.physicsBody?.allowsRotation = false
+        
         World.addChild(player)
         player.breath()
 
@@ -136,14 +140,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         } else {
             player.stop()
             player.jump()
+     
         }
         
         // preventing double jump mid air
-        if player.position.y <= fg.position.y * -2 {
-            player.physicsBody?.velocity = CGVectorMake(0,0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0,15))
-        }
-        
+       // if player.position.y <= fg.position.y * -2 {
+        /*
+        player.physicsBody?.velocity = CGVectorMake(0,0)
+        player.physicsBody?.applyImpulse(CGVectorMake(0,155))
+        */
+        //}
+
     }
     
     

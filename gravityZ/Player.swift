@@ -154,7 +154,7 @@ class Player: SKSpriteNode {
                 self.body.runAction(up)
             })
         })
-        
+
     }
     
     func breath() {
