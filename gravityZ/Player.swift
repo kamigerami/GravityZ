@@ -143,18 +143,18 @@ class Player: SKSpriteNode {
     }
     
     func jump() {
-        let rotateBack = SKAction.rotateByAngle((CGFloat(M_PI)/2.0), duration: 0.1)
-        let rotateReverse = SKAction.rotateByAngle(-CGFloat(M_PI/2.0), duration: 0.1)
+        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI)/2.0, duration: 0.1)
+        let rotateReverse = SKAction.rotateByAngle(-CGFloat(M_PI)/2.0, duration: 0.1)
         
         let down = SKAction.moveByX(0, y: -6, duration: 0.05)
-        let up  = SKAction.moveByX(0, y: 8, duration: 0.05)
+        let up  = SKAction.moveByX(0, y: 6, duration: 0.05)
         arm.runAction(rotateBack)
-        body.runAction(SKAction.sequence([down, up]), completion: { () -> Void in
-            self.arm.runAction(rotateReverse)
+        body.runAction(down, completion: { () -> Void in
+            self.arm.runAction(rotateReverse, completion: { () -> Void in
+                self.body.runAction(up)
             })
-        
-        body.physicsBody?.velocity = CGVectorMake(0,0)
-        body.physicsBody?.applyImpulse(CGVectorMake(0,15))
+        })
+
         
     }
     
