@@ -88,14 +88,14 @@ class Player: SKSpriteNode {
         left_leg = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(body.size.width/4, body.size.height/8 + 2))
         left_leg.position = CGPointMake(leftEye.position.x - left_leg.size.width + 2, -body.size.height/2 + left_leg.size.height/2 - 8)
         
-        body.addChild(left_leg)
+        addChild(left_leg)
         
         // right leg
         right_leg = left_leg.copy() as! SKSpriteNode
         right_leg.position.x = left_leg.position.x + 18
         
         
-        body.addChild(right_leg)
+        addChild(right_leg)
         
         
         // left foot
@@ -128,8 +128,8 @@ class Player: SKSpriteNode {
     }
     
     func performOneRunCycle() {
-        let up = SKAction.moveByX(0, y: 2, duration: 0.05)
-        let down = SKAction.moveByX(0, y: -2, duration: 0.05)
+        let up = SKAction.moveByX(0, y: 2, duration: 0.1)
+        let down = SKAction.moveByX(0, y: -2, duration: 0.1)
         
         left_leg.runAction(up, completion: { () -> Void in
             self.left_leg.runAction(down)
@@ -151,7 +151,8 @@ class Player: SKSpriteNode {
         body.runAction(SKAction.sequence([down,up]))
         arm.runAction(SKAction.sequence([rotateBack, rotateReverse]))
         body.position.y = 0
-        
+        self.physicsBody?.velocity = CGVectorMake(0,0)
+        self.physicsBody?.applyImpulse(CGVectorMake(0,75))
 
     }
     

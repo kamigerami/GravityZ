@@ -15,28 +15,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     let maxLevels = 3
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
+    
     var isStarted = false
-
+    var notInAir = false
     
-    
-    var bg = SKSpriteNode()
-    
-    var fg = SKSpriteNode()
     
     var World: SKNode!
     var Camera: SKNode!
+    
+    var bg = SKSpriteNode()
 
     var player: Player!
+    var PLAYER: UInt32!
     
-    var ground: GroundMovement!
-
+    
+    var fg: Ground!
+    var GROUND: UInt32!
+    
     let starField = SKEmitterNode(fileNamed: "StarField")
 
     
     
+    
+    
+    enum ColliderType:UInt32 {
+        case PLAYER = 1
+        case GROUND = 2
+    }
+    
+    
     override func didMoveToView(view: SKView) {
         
-     
+        
+       
+        addPhysicsWorld()
+        addPlayer()
+        addMovingGround()
+        
+    }
+    
+    func addStarField() {
+        
+        
+        // starField
+        
+        starField.position = CGPointMake(size.width/2,size.height)
+        starField.zPosition = 5
+        addChild(starField)
+
+        
+        
+        
+    }
+    func addPhysicsWorld() {
+        
         
         // world and camera
         
@@ -52,38 +84,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         // background
         
-            self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
-            // add the rest of foreground / background here //
-        
-        
-       // starField
-        
-            starField.position = CGPointMake(size.width/2,size.height)
-            starField.zPosition = 5
-       
-      // Player
-       
-        // instantiating the Player with the size arguments
-        player = Player(size: CGSizeMake(frame.size.height, frame.size.height))
-        
-        player.zPosition = 1
-        
-        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , fg.position.y / 4 - player.size.height * 1.5 - 12 )
-        
-        player.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
-        player.physicsBody?.dynamic = true
-        player.physicsBody?.allowsRotation = false
-        
-        World.addChild(player)
-        player.breath()
-
-
+        //self.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame)
+        // add the rest of foreground / background here //
+        self.backgroundColor = UIColor.grayColor()
         
         
 
         
     }
-   
+    func addPlayer() {
+        // Player
+        
+        // instantiating the Player with the size arguments
+        player = Player(size: CGSizeMake(frame.size.height, frame.size.height))
+        
+        player.zPosition = 1
+        
+        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , frame.size.height / 8 - player.size.height * 1.5 - 12 )
+        
+        // set physics
+        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.frame.size)
+        player.physicsBody?.dynamic = true
+        player.physicsBody?.allowsRotation = false
+        player.physicsBody!.categoryBitMask = ColliderType.PLAYER.rawValue
+        player.physicsBody!.contactTestBitMask = ColliderType.GROUND.rawValue
+        player.physicsBody!.collisionBitMask = ColliderType.GROUND.rawValue
+        
+        addChild(player)
+        
+        player.breath()
+
+        
+        
+    }
+    
+    func addMovingGround() {
+        fg = Ground(size: CGSizeMake(frame.size.width, player.size.height / 2))
+        fg.position = CGPointMake(-fg.size.width/2, player.position.y - player.size.height + 4)
+        
+        addChild(fg)
+    }
+    
+    
     func centerOnNode(node: SKNode) {
         
         let cameraPositionInScene: CGPoint = node.scene!.convertPoint(node.position, fromNode: node.parent!)
@@ -100,11 +142,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
     }
 
+    func didBeginContact(contact: SKPhysicsContact) {
+            notInAir = true
+    }
+   
+
+    
     func start() {
         isStarted = true
         player.stop()
         player.startRunning()
-        World.addChild(starField)
+        addStarField()
+        fg.start()
 
     }
     
@@ -113,23 +162,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             start()
         } else {
             player.stop()
+            if notInAir {
+                notInAir = false
             player.jump()
-     
+            }
         }
         
-        // preventing double jump mid air
-       // if player.position.y <= fg.position.y * -2 {
-        /*
-        player.physicsBody?.velocity = CGVectorMake(0,0)
-        player.physicsBody?.applyImpulse(CGVectorMake(0,155))
-        */
-        //}
 
     }
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-    
             player.stop()
   
     
