@@ -49,8 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
        
         addPhysicsWorld()
-        addPlayer()
         addMovingGround()
+        addPlayer()
+      
         
     }
     
@@ -73,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         // world and camera
         
         self.physicsWorld.contactDelegate = self
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+       // self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
         self.World = SKNode()
         self.World.name = "World"
@@ -100,7 +101,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         player.zPosition = 1
         
-        player.position = CGPointMake(size.width / 4 + player.size.width - 200 , frame.size.height / 8 - player.size.height * 1.5 - 12 )
+        player.position = CGPointMake(70, fg.position.y + fg.frame.size.height/2 + player.frame.size.height/2)
         
         // set physics
         player.physicsBody = SKPhysicsBody(rectangleOfSize: player.frame.size)
@@ -119,8 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func addMovingGround() {
-        fg = Ground(size: CGSizeMake(frame.size.width, player.size.height / 2))
-        fg.position = CGPointMake(-fg.size.width/2, player.position.y - player.size.height + 4)
+        fg = Ground(size: CGSizeMake(view!.frame.width, 20.0))
+        fg.position = CGPointMake(0, view!.frame.size.height/2)
         
         addChild(fg)
     }

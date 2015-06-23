@@ -11,10 +11,13 @@ import SpriteKit
 
 class Ground: SKSpriteNode {
     
+    // Initial Variables
+    let kDefaultXToMovePerSecond: CGFloat = 320.0
+    
     let NUMBER_OF_SEGMENTS = 20
     let COLOR_ONE = UIColor(red: 46.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
     let COLOR_TWO = UIColor(red: 36.0/255.0, green: 36.0/255.0, blue: 36.0/255.0, alpha: 1.0)
-    
+
     init(size: CGSize) {
         super.init(texture: nil, color: UIColor.brownColor(), size: CGSizeMake(size.width*2, size.height))
         anchorPoint = CGPointMake(0, 0.5)
@@ -31,7 +34,7 @@ class Ground: SKSpriteNode {
             segment.anchorPoint = CGPointMake(0.0, 0.5)
             segment.position = CGPointMake(CGFloat(i)*segment.size.width, 0)
             addChild(segment)
-            
+      
             segment.physicsBody = SKPhysicsBody(rectangleOfSize: segment.frame.size)
             segment.physicsBody?.dynamic = false
             segment.physicsBody!.categoryBitMask = GameScene.ColliderType.GROUND.rawValue
@@ -49,10 +52,10 @@ class Ground: SKSpriteNode {
     
     
     func start() {
-        let adjustedDuration = NSTimeInterval(frame.size.width/100)
+        let adjustedDuration = NSTimeInterval(frame.size.width / kDefaultXToMovePerSecond)
         
-        let moveLeft = SKAction.moveByX(-frame.size.width/2, y: 0, duration: adjustedDuration)
-        let resetPosition = SKAction.moveByX(frame.size.width/2, y: 0, duration: 0)
+        let moveLeft = SKAction.moveByX(-frame.size.width/2, y: 0, duration: adjustedDuration/2)
+        let resetPosition = SKAction.moveToX(0, duration: 0)
         let moveSequence = SKAction.sequence([moveLeft, resetPosition])
         
         runAction(SKAction.repeatActionForever(moveSequence))
