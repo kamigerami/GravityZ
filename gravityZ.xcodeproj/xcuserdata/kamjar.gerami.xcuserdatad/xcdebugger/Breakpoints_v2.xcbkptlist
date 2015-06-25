@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "gravityZ/GameScene.swift"
-            timestampString = "456931251.406842"
+            timestampString = "456935090.494022"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "swipedUp(_:)"
             landmarkType = "5">
          </BreakpointContent>

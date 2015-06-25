@@ -22,7 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var World: SKNode!
     var Camera: SKNode!
     
-    var bg = SKSpriteNode()
+    var bg: backGround!
 
     var player: Player!
     var PLAYER: UInt32!
@@ -50,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         addPhysicsWorld()
+        addMovingBackground()
         addMovingGround()
         addPlayer()
         doSwipes()
@@ -178,7 +179,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(fg)
     }
     
-    
+    func addMovingBackground() {
+        bg = backGround(size: CGSizeMake(view!.frame.width, kfgHeight))
+        bg.position = CGPointMake(0, -kfgHeight * 2 )
+        bg.zPosition = -15
+        addChild(bg)
+        
+        
+    }
     func centerOnNode(node: SKNode) {
         
         let cameraPositionInScene: CGPoint = node.scene!.convertPoint(node.position, fromNode: node.parent!)
