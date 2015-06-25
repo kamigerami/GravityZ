@@ -17,7 +17,7 @@ class Player: SKSpriteNode {
     var left_leg: SKSpriteNode!
     var right_leg: SKSpriteNode!
     
-    var isUpsideDown = false
+    var isNotUpsideDown = false
     var gravityOn = false
     
     
@@ -174,22 +174,20 @@ class Player: SKSpriteNode {
         arm.runAction(SKAction.sequence([rotateBack, rotateReverse]))
         body.position.y = 0
         self.physicsBody?.velocity = CGVectorMake(0,0)
-        self.physicsBody?.applyImpulse(CGVectorMake(0,75))
+        self.physicsBody?.applyImpulse(CGVectorMake(0,-75))
         
         
     }
     
     func flip() {
-        isUpsideDown = !isUpsideDown
-        gravityOn = !gravityOn
+        isNotUpsideDown = !isNotUpsideDown
         
         var scale: CGFloat!
-          if isUpsideDown {
-            self.physicsBody?.dynamic = false
+          if isNotUpsideDown {
               scale = -1.0
           } else {
-            self.physicsBody?.dynamic = true
               scale = 1.0
+    
           }
         
         

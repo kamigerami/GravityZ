@@ -16,7 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var accelerationX: CGFloat = 0.5
     
     var isStarted = false
-    var inAir = false
+    var contactWithGround = false
     
     
     var World: SKNode!
@@ -43,7 +43,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func didMoveToView(view: SKView) {
-    
+    // add BG
+        
+        // create and add blue-fish.png image to screen
+        
+        
         
         addPhysicsWorld()
         addMovingGround()
@@ -73,15 +77,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    
-    
-    func swipedUp(sender:UISwipeGestureRecognizer){
-                player.flip()
-    
+    func gravitySwitch() {
+        
+        if player.isNotUpsideDown {
+            println("changing gravitational pull")
+            self.physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+            player.flip()
+            
+        } else {
+            print("player is NOT upsidedown?:\(player.isNotUpsideDown)")
+            player.flip()
+            self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 9.8)
+        }
+
+        
+        
     }
     
+    func swipedUp(sender:UISwipeGestureRecognizer){
+        gravitySwitch()
+     }
+    
     func swipedDown(sender:UISwipeGestureRecognizer){
-                player.flip()
+                gravitySwitch()
     }
     
     //
@@ -178,7 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func didBeginContact(contact: SKPhysicsContact) {
-            inAir = true
+            contactWithGround = true
     }
    
 
@@ -204,13 +222,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if isStarted {
             player.stop()
-        if inAir {
-            inAir = false
-            player.jump()
-        }
+            if contactWithGround {
+                contactWithGround = false
+                if !player.isNotUpsideDown {
+                    player.jump()
+                } else {
+                    player.gravityJump()
+                }
+            }
 
-  
+        }
     
     }
     
