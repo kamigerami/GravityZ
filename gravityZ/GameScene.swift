@@ -7,17 +7,16 @@
 //
 
 import SpriteKit
-import SpriteKit
 import CoreMotion
 
-class GameScene: SKScene, SKPhysicsContactDelegate{
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let maxLevels = 3
     let motionManager: CMMotionManager = CMMotionManager()
     var accelerationX: CGFloat = 0.5
     
     var isStarted = false
-    var notInAir = false
+    var inAir = false
     
     
     var World: SKNode!
@@ -34,9 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     let starField = SKEmitterNode(fileNamed: "StarField")
 
-    
-    
-    
+
     
     enum ColliderType:UInt32 {
         case PLAYER = 1
@@ -44,16 +41,51 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
+    
     override func didMoveToView(view: SKView) {
+    
         
-        
-       
         addPhysicsWorld()
         addMovingGround()
         addPlayer()
-      
+        doSwipes()
         
     }
+    /// swipe gestures
+
+    
+    func doSwipes() {
+        
+        /* Setup your scene here */
+        
+        
+        
+        let swipeUp:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedUp:"))
+        swipeUp.direction = .Up
+        self.view!.addGestureRecognizer(swipeUp)
+        
+        
+        let swipeDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector("swipedDown:"))
+        swipeDown.direction = .Down
+        self.view!.addGestureRecognizer(swipeDown)
+        
+        
+        
+    }
+    
+    
+    
+    func swipedUp(sender:UISwipeGestureRecognizer){
+                player.flip()
+    
+    }
+    
+    func swipedDown(sender:UISwipeGestureRecognizer){
+                player.flip()
+    }
+    
+    //
+    
     
     func addStarField() {
         
@@ -93,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
         
     }
+    
     func addPlayer() {
         // Player
         
@@ -104,6 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         player.position = CGPointMake(70, fg.position.y + fg.frame.size.height/2 + player.frame.size.height/2)
         
         // set physics
+        
         player.physicsBody = SKPhysicsBody(rectangleOfSize: player.frame.size)
         player.physicsBody?.dynamic = true
         player.physicsBody?.allowsRotation = false
@@ -120,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     func addMovingGround() {
-        fg = Ground(size: CGSizeMake(view!.frame.width, 20.0))
+        fg = Ground(size: CGSizeMake(view!.frame.width, kfgHeight))
         fg.position = CGPointMake(0, view!.frame.size.height/2)
         
         addChild(fg)
@@ -144,7 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
 
     func didBeginContact(contact: SKPhysicsContact) {
-            notInAir = true
+            inAir = true
     }
    
 
@@ -163,11 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             start()
         } else {
             player.stop()
-            if notInAir {
-                notInAir = false
-            player.jump()
-            }
-        }
+              }
         
 
     }
@@ -175,6 +205,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
             player.stop()
+        if inAir {
+            inAir = false
+            player.jump()
+        }
+
   
     
     }

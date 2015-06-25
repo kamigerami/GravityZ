@@ -17,6 +17,14 @@ class Player: SKSpriteNode {
     var left_leg: SKSpriteNode!
     var right_leg: SKSpriteNode!
     
+    var isUpsideDown = false
+    var gravityOn = false
+    
+    
+    var World = GameScene()
+    
+
+    
     init(size: CGSize) {
         
         // the frame of which the rest of the body is a part of
@@ -154,6 +162,42 @@ class Player: SKSpriteNode {
         self.physicsBody?.velocity = CGVectorMake(0,0)
         self.physicsBody?.applyImpulse(CGVectorMake(0,75))
 
+    }
+    
+    func gravityJump() {
+        let rotateBack = SKAction.rotateByAngle(CGFloat(M_PI)/2.0, duration: 0.1)
+        let rotateReverse = SKAction.rotateByAngle(-CGFloat(M_PI)/2.0, duration: 0.1)
+        
+        let down = SKAction.moveByX(0, y: -5, duration: 0.05)
+        let up  = SKAction.moveByX(0, y: 5, duration: 0.05)
+        body.runAction(SKAction.sequence([down,up]))
+        arm.runAction(SKAction.sequence([rotateBack, rotateReverse]))
+        body.position.y = 0
+        self.physicsBody?.velocity = CGVectorMake(0,0)
+        self.physicsBody?.applyImpulse(CGVectorMake(0,75))
+        
+        
+    }
+    
+    func flip() {
+        isUpsideDown = !isUpsideDown
+        gravityOn = !gravityOn
+        
+        var scale: CGFloat!
+          if isUpsideDown {
+            self.physicsBody?.dynamic = false
+              scale = -1.0
+          } else {
+            self.physicsBody?.dynamic = true
+              scale = 1.0
+          }
+        
+        
+        let translate = SKAction.moveByX(0, y: scale*(size.height + kfgHeight), duration: 0.1)
+        let flip = SKAction.scaleYTo(scale, duration: 0.1)
+        
+        runAction(translate)
+        runAction(flip)
     }
     
     func breath() {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB849FA91B3889440098F2A0 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB849FA81B3889440098F2A0 /* Ground.swift */; };
+		CB8DC1541B3BFB1900306517 /* ContantValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8DC1531B3BFB1900306517 /* ContantValues.swift */; };
 		CB990E681B36CC51007378F9 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB990E671B36CC51007378F9 /* Player.swift */; };
 		CBE7E84D1B34C33800B56F92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E84C1B34C33800B56F92 /* AppDelegate.swift */; };
 		CBE7E8511B34C33800B56F92 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE7E8501B34C33800B56F92 /* GameScene.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		CB849FA81B3889440098F2A0 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		CB8DC1531B3BFB1900306517 /* ContantValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContantValues.swift; sourceTree = "<group>"; };
 		CB990E671B36CC51007378F9 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CBE7E8471B34C33800B56F92 /* gravityZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gravityZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBE7E84B1B34C33800B56F92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				CBE7E8701B34C44700B56F92 /* StartGameScene.swift */,
 				CBE7E84C1B34C33800B56F92 /* AppDelegate.swift */,
 				CBE7E8501B34C33800B56F92 /* GameScene.swift */,
+				CB8DC1531B3BFB1900306517 /* ContantValues.swift */,
 				CB849FA81B3889440098F2A0 /* Ground.swift */,
 				CB990E671B36CC51007378F9 /* Player.swift */,
 				CBE7E8891B34E30600B56F92 /* PulsatingText.swift */,
@@ -256,6 +259,7 @@
 				CBE7E8531B34C33800B56F92 /* GameViewController.swift in Sources */,
 				CBE7E88A1B34E30600B56F92 /* PulsatingText.swift in Sources */,
 				CB990E681B36CC51007378F9 /* Player.swift in Sources */,
+				CB8DC1541B3BFB1900306517 /* ContantValues.swift in Sources */,
 				CB849FA91B3889440098F2A0 /* Ground.swift in Sources */,
 				CBE7E84D1B34C33800B56F92 /* AppDelegate.swift in Sources */,
 			);

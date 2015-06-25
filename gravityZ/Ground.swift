@@ -12,9 +12,7 @@ import SpriteKit
 class Ground: SKSpriteNode {
     
     // Initial Variables
-    let kDefaultXToMovePerSecond: CGFloat = 320.0
     
-    let NUMBER_OF_SEGMENTS = 20
     let COLOR_ONE = UIColor(red: 46.0/255.0, green: 46.0/255.0, blue: 46.0/255.0, alpha: 1.0)
     let COLOR_TWO = UIColor(red: 36.0/255.0, green: 36.0/255.0, blue: 36.0/255.0, alpha: 1.0)
 
@@ -22,7 +20,7 @@ class Ground: SKSpriteNode {
         super.init(texture: nil, color: UIColor.brownColor(), size: CGSizeMake(size.width*2, size.height))
         anchorPoint = CGPointMake(0, 0.5)
         
-        for var i = 0; i < NUMBER_OF_SEGMENTS; i++ {
+        for var i = 0; i < kNUMBER_OF_SEGMENTS; i++ {
             var segmentColor: UIColor!
             if i % 2 == 0 {
                 segmentColor = COLOR_ONE
@@ -30,7 +28,7 @@ class Ground: SKSpriteNode {
                 segmentColor = COLOR_TWO
             }
             
-            let segment = SKSpriteNode(color: segmentColor, size: CGSizeMake(self.size.width / CGFloat(NUMBER_OF_SEGMENTS), self.size.height))
+            let segment = SKSpriteNode(color: segmentColor, size: CGSizeMake(self.size.width / CGFloat(kNUMBER_OF_SEGMENTS), self.size.height))
             segment.anchorPoint = CGPointMake(0.0, 0.5)
             segment.position = CGPointMake(CGFloat(i)*segment.size.width, 0)
             addChild(segment)
