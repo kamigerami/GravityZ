@@ -17,6 +17,15 @@ class Player: SKSpriteNode {
     var left_leg: SKSpriteNode!
     var right_leg: SKSpriteNode!
     
+    var left_eyeBrows: SKSpriteNode!
+    var right_eyeBrows: SKSpriteNode!
+    
+    var leftEye: SKSpriteNode!
+    var rightEye: SKSpriteNode!
+    
+    var pupil: SKSpriteNode!
+    
+    
     var isNotUpsideDown = false
     var gravityOn = false
     
@@ -48,13 +57,30 @@ class Player: SKSpriteNode {
         body.addChild(face)
         
         
+        let banDana = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(body.size.width, 4))
+        banDana.position = CGPointMake(0, face.size.height + 1)
+        
+        body.addChild(banDana)
+        
+        let banDana_tied = SKSpriteNode(color: UIColor.redColor(), size: CGSizeMake(8, 2))
+        banDana_tied.position = CGPointMake(-banDana.size.width/2 - 5, 0)
+        
+        let angle = 15 * kDegreesToRadians
+        
+        let banDana_rotate = SKAction.rotateByAngle(angle, duration: 0.5)
+        let banDana_rotate_reverse = SKAction.rotateByAngle(-angle, duration: 0.5)
+        
+        var banDana_sequence = SKAction.sequence([banDana_rotate, banDana_rotate_reverse])
+        banDana_tied.runAction(SKAction.repeatActionForever(banDana_sequence))
+        
+        banDana.addChild(banDana_tied)
         // eyes
         
         let eyeColor = UIColor.whiteColor()
-        let leftEye = SKSpriteNode(color: eyeColor, size: CGSizeMake(6, 6))
-        let rightEye = leftEye.copy() as! SKSpriteNode
+        leftEye = SKSpriteNode(color: eyeColor, size: CGSizeMake(6, 6))
+        rightEye = leftEye.copy() as! SKSpriteNode
         
-        let pupil = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(3,3))
+        pupil = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(3,3))
             pupil.position = CGPointMake(2, 0)
         
         leftEye.addChild(pupil)
@@ -70,11 +96,14 @@ class Player: SKSpriteNode {
         
         // eyebrows
         
-        let eyeBrows = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(10, 2))
-        eyeBrows.position = CGPointMake(0, leftEye.size.height/2 + 2)
+        left_eyeBrows = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(10, 2))
+        left_eyeBrows.position = CGPointMake(0, leftEye.size.height/2 + 2)
         
-        leftEye.addChild(eyeBrows)
-        rightEye.addChild(eyeBrows.copy() as! SKSpriteNode)
+        right_eyeBrows = left_eyeBrows.copy() as! SKSpriteNode
+        right_eyeBrows.position = CGPointMake(2, rightEye.size.height/2 + 2)
+        
+        leftEye.addChild(left_eyeBrows)
+        rightEye.addChild(right_eyeBrows)
         
         // the arms
         let armColor =  UIColor(red: 44.0/255.0, green: 44.0/255.0, blue: 44.0/255.0, alpha: 1.0)
@@ -120,6 +149,31 @@ class Player: SKSpriteNode {
         right_leg.addChild(right_foot)
         
         }
+    
+    func facial_sad() {
+        left_eyeBrows.size = CGSizeMake(8, 2)
+        right_eyeBrows.size = CGSizeMake(8, 2)
+        left_eyeBrows.zRotation = CGFloat(M_PI/4)
+        right_eyeBrows.zRotation = CGFloat(100)
+        left_eyeBrows.position = CGPointMake(0, leftEye.size.height/2 + 1)
+        right_eyeBrows.position = CGPointMake(2, rightEye.size.height/2 + 1)
+        
+    }
+    
+    
+    func facial_mad() {
+        let angle = 35 * kDegreesToRadians
+        left_eyeBrows.size = CGSizeMake(7, 2)
+        right_eyeBrows.size = CGSizeMake(7, 2)
+        left_eyeBrows.zRotation = CGFloat(-angle)
+        right_eyeBrows.zRotation = CGFloat(angle)
+        left_eyeBrows.position = CGPointMake(4, leftEye.size.height/2 + 2)
+        right_eyeBrows.position = CGPointMake(-2, rightEye.size.height/2 + 2)
+
+        
+    }
+    
+    
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -185,6 +239,7 @@ class Player: SKSpriteNode {
         var scale: CGFloat!
           if isNotUpsideDown {
               scale = -1.0
+              facial_mad()
           } else {
               scale = 1.0
     
